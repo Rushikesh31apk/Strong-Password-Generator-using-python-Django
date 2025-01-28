@@ -20,7 +20,7 @@ def password(request):
     if isNumber=='on':
         choices_I_have.extend(list('0123456789'))
     if isSymbol=='on':
-        choices_I_have.extend(list('!@#$%^&*()_+-={}:<>?'))
+        choices_I_have.extend(list('!@#$%^&*_+-=:?'))
     myPassword=""
     for i in range(int(length)):
         choosen=random.choice(choices_I_have)
