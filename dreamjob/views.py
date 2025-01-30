@@ -9,7 +9,6 @@ from datetime import datetime
 
 def index(request):
     return  render(request,'index.html')
-
 def password(request):
     length=request.GET.get('length')
     isUpper=request.GET.get('use_uppercase')
@@ -33,13 +32,6 @@ def password(request):
     }
 
     return render(request,'password.html',data)
-
-
-def about(request):
-    return render(request,'about.html',{})
-
-def contact(request):
-    return render(request,'contact.html')
 def home(request):
     data_submited = False
     if request.method == 'POST':
@@ -82,5 +74,3 @@ def home(request):
     }
     return render(request,'home.html',data)
 
-def services(request):
-    return render(request,'services.html')
