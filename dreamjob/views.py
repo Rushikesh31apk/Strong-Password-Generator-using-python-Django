@@ -10,6 +10,7 @@ from datetime import datetime
 def index(request):
     return  render(request,'index.html')
 def password(request):
+
     length=request.GET.get('length')
     isUpper=request.GET.get('use_uppercase')
     isNumber=request.GET.get('use_numbers')
@@ -32,6 +33,8 @@ def password(request):
     }
 
     return render(request,'password.html',data)
+
+    
 def home(request):
     data_submited = False
     if request.method == 'POST':
