@@ -46,4 +46,32 @@ def delete_emp(request,id):
 
 def update_emp(request,id):
     emp = Emp.objects.get(id=id)
-    return render(request,'/emp/update_emp.html',{'emp':emp})
+    return render(request,'emp/update_emp.html',{'emp':emp})
+
+def do_update(request,id):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        age= request.POST.get('age')
+        salary = request.POST.get('salary')
+        department= request.POST.get('department')
+        address = request.POST.get('address')
+        designation= request.POST.get('designation')
+        date_of_joining = request.POST.get('date_of_joining')
+
+        # create model object and set the data
+        emp = Emp.objects.get(id=id)
+        emp.name = name
+        emp.email = email
+        emp.age = age
+        emp.salary = salary
+        emp.department = department
+        emp.address = address
+        emp.designation= designation
+        emp.date_of_joining = date_of_joining
+        
+        # save the data to database
+        emp.save()
+
+    
+    return redirect('/emp/emphome/')
