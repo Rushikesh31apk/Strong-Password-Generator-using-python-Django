@@ -22,8 +22,6 @@ def add_emp(request):
         address = request.POST.get('address')
         designation= request.POST.get('designation')
         date_of_joining = request.POST.get('date_of_joining')
-
-
         # create model object and set the data
         emp = Emp()
         emp.name = name
@@ -34,12 +32,18 @@ def add_emp(request):
         emp.address = address
         emp.designation= designation
         emp.date_of_joining = date_of_joining
-
         # save the data to database
         emp.save()
-
         # prepare msg to be displayed on the page
         return redirect('/emp/emphome/')
-
-
     return render(request,'emp/add_emp.html',{})
+
+
+def delete_emp(request,id):
+    emp = Emp.objects.get(id=id)
+    emp.delete()
+    return redirect('/emp/emphome/')
+
+def update_emp(request,id):
+    emp = Emp.objects.get(id=id)
+    return render(request,'/emp/update_emp.html',{'emp':emp})

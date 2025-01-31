@@ -73,6 +73,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">Employee ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Age</th>
@@ -86,6 +87,7 @@
       <tbody>
         {% for employee in emp %}
         <tr>
+          <td>{{ forloop.counter}}</td>
           <td>{{ employee.name }}</td>
           <td>{{ employee.email }}</td>
           <td>{{ employee.age }}</td>
@@ -94,8 +96,8 @@
           <td>{{ employee.designation }}</td>
           <td>{{ employee.date_of_joining }}</td>
           <td>
-            <a href="/emp/edit/{{ employee.id }}" class="btn btn-warning btn-sm">Edit</a>
-            <a href="/emp/delete/{{ employee.id }}" class="btn btn-danger btn-sm">Delete</a>
+            <a href="/emp/update-emp/{{ employee.id }}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="/emp/delete-emp/{{ employee.id }}" class="btn btn-danger btn-sm">Delete</a>
           </td>
         </tr>
         {% endfor %}
