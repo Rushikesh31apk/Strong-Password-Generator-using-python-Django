@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .testimonial-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            perspective: 1000px;
+            padding: 20px;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: rotateY(10deg) rotateX(10deg) translateY(-10px);
+        }
+
+        .testimonial-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .testimonial-card h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .testimonial-card p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .testimonial-card .review {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .testimonial-card .review span {
+            color: #ffd700;
+            font-size: 1.2em;
+        }
+
+        .feedback-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .feedback-form .form-control {
+            margin-bottom: 15px;
+        }
+
+        .feedback-form .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Include Navbar -->
+    {% include 'emp/navbar.html' %}
+
+    <!-- Feedback Form Section -->
+    <div class="feedback-form">
+        <h2>Submit Your Feedback</h2>
+        <form action="/submit-feedback/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Upload Image</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="testimonial_text">Your Feedback</label>
+                <textarea class="form-control" id="testimonial_text" name="testimonial_text" rows="4" placeholder="Enter your feedback" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <select class="form-control" id="rating" name="rating" required>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonial-container">
+        <h2 class="text-center fw-bold mb-4 text-primary">Testimonials</h2>
+        {% for testimonial in testi %}
+        <div class="testimonial-card">
+            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+            <h3>{{ testimonial.name }}</h3>
+            <p>{{ testimonial.testimonial_text }}</p>
+            <div class="review">
+                {% for _ in "12345" %}
+                    {% if forloop.counter <= testimonial.rating %}
+                        <span>★</span>  <!-- Filled star -->
+                    {% else %}
+                        <span>☆</span>  <!-- Empty star -->
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -9,4 +9,6 @@ urlpatterns = [
    path('update-emp/<int:id>',views.update_emp),
    path('do-update-emp/<int:id>',views.do_update),
    path('testmonials/',views.testmonials),
+   path('feedback/',views.feedback),
+   
 ]

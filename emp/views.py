@@ -81,3 +81,6 @@ def testmonials(request):
     testi= Testomonial.objects.all()
 
     return render(request,'emp/testmonials.html',{'testi': testi})
+
+def feedback(request):
+    return render(request,'emp/feedback.html',{ })
