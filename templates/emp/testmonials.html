@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Testimonial Cards</title>
+    <title>Testimonials</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
         }
 
@@ -21,6 +19,7 @@
             justify-content: center;
             gap: 20px;
             perspective: 1000px;
+            padding: 20px;
         }
 
         .testimonial-card {
@@ -72,37 +71,36 @@
 </head>
 <body>
 
+    <!-- Include Navbar -->
+    {% include 'emp/navbar.html' %}
+    <br>
+    <h2 class="text-center fw-bold mb-4 text-primary">Testimonials</h2>
+
+    <!-- Testimonials Section -->
     <div class="testimonial-container">
-        <!-- Testimonial Card 1 -->
+        <!-- Loop through testimonials -->
+        {% for testimonial in testi %}
         <div class="testimonial-card">
-            <img src="https://via.placeholder.com/100" alt="John Doe">
-            <h3>John Doe</h3>
-            <p>"Absolutely amazing service! The team went above and beyond to meet my needs. Highly recommended!"</p>
+            <!-- Display testimonial image -->
+            <img src="/media/{{testimonial.image}}" alt="{{ testimonial.name }}">
+            <!-- Display testimonial name -->
+            <h4>{{ testimonial.name }}</h4>
+            <!-- Display testimonial text -->
+            <p>{{ testimonial.testomonial }}</p>
+            <!-- Display testimonial review stars -->
             <div class="review">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                {% for _ in "12345" %}
+                    {% if forloop.counter <= testimonial.rating %}
+                        <span>★</span>
+                    {% else %}
+                        <span>☆</span>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-
-        <!-- Testimonial Card 2 -->
-        <div class="testimonial-card">
-            <img src="https://via.placeholder.com/100" alt="Jane Smith">
-            <h3>Jane Smith</h3>
-            <p>"I had a great experience working with them. They are very professional and deliver on time."</p>
-            <div class="review">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-            </div>
-        </div>
-
-        <!-- Testimonial Card 3 -->
-        <div class="testimonial-card">
-            <img src="https://via.placeholder.com/100" alt="Alice Johnson">
-            <h3>Alice Johnson</h3>
-            <p>"The quality of work is outstanding. I will definitely be using their services again in the future."</p>
-            <div class="review">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

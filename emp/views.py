@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from .models import Emp  # Import Emp model
+from .models import Emp, Testomonial  # Import Emp model
 
 
 
@@ -78,4 +78,6 @@ def do_update(request,id):
 
 
 def testmonials(request):
-    return render(request,'emp/testmonials.html',{})
+    testi= Testomonial.objects.all()
+
+    return render(request,'emp/testmonials.html',{'testi': testi})
