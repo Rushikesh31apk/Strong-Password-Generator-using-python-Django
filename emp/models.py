@@ -16,10 +16,15 @@ class Emp(models.Model):
 
 
     
-class Testomonial(models.Model):
+from django.db import models
+
+from django.db import models
+
+class Testomonial(models.Model):  # Spelling: Testomonial
     name = models.CharField(max_length=100)
-    testomonial = models.TextField()
-    image = models.ImageField(upload_to='testomonial/')
-    rating = models.IntegerField(max_length=1)
+    testomonial = models.TextField()  # Spelling: testomonial
+    image = models.ImageField(upload_to='testomonial/')  # Spelling: testomonial
+    rating = models.IntegerField()  # Removed max_length (not valid for IntegerField)
+
     def __str__(self):
-        return self.testomonial
+        return self.testomonial  # Spelling: testomonial

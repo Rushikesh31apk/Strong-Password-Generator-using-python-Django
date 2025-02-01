@@ -90,64 +90,6 @@
             background: #2980b9;
         }
 
-        /* Testimonials Section Styles */
-        .testimonial-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            padding: 40px 20px;
-        }
-
-        .testimonial-card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            padding: 20px;
-            text-align: center;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .testimonial-card img {
-            width: 120px;
-            height: 90px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            object-fit: cover;
-            border: 4px solid #3498db;
-        }
-
-        .testimonial-card h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #2c3e50;
-        }
-
-        .testimonial-card p {
-            font-size: 1rem;
-            color: #666;
-            line-height: 1.6;
-            margin: 10px 0;
-        }
-
-        .testimonial-card .review {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .testimonial-card .review span {
-            color: #ffd700;
-            font-size: 1.2rem;
-        }
-
         /* Animations */
         @keyframes fadeIn {
             from {
@@ -184,8 +126,8 @@
             </div>
 
             <div class="form-group">
-                <label for="{{ form.testomonial.id_for_label }}">Your Feedback</label>
-                {{ form.testomonial }}
+                <label for="{{ form.testomonial.id_for_label }}">Your Testomonial</label>  <!-- Spelling: testomonial -->
+                {{ form.testomonial }}  <!-- Spelling: testomonial -->
                 {% if form.testomonial.errors %}
                     <div class="text-danger">
                         {{ form.testomonial.errors }}
@@ -211,12 +153,11 @@
                         {{ form.image.errors }}
                     </div>
                 {% endif %}
-            </div >
+            </div>
+
             <div class="container text-center">
                 <button type="submit" class="btn btn-primary">Submit Feedback</button>
             </div>
-
-            
         </form>
     </div>
 

@@ -85,12 +85,21 @@ def testmonials(request):
 
 def feedback(request):
     if request.method == 'POST':
-        form= FeedbackForm(request.POST)
+        form = FeedbackForm(request.POST, request.FILES)  # Include request.FILES for file uploads
         if form.is_valid():
-            form.save()
-            return redirect('/emp/emphome/')
+            # Save the form data to the database
+            testomonial = Testomonial(  # Spelling: Testomonial
+                name=form.cleaned_data['name'],
+                testomonial=form.cleaned_data['testomonial'],  # Spelling: testomonial
+                rating=form.cleaned_data['rating'],
+                image=form.cleaned_data['image']
+            )
+            testomonial.save()  # Spelling: testomonial
+            return redirect('/emp/emphome/')  # Redirect to the home page after successful submission
         else:
-            print(form.errors)
+            print(form.errors)  # Print form errors for debugging
     else:
-        form= FeedbackForm()
-        return render(request,'emp/feedback.html',{'form':form })
+        form = FeedbackForm()  # Render an empty form for GET requests
+
+    # Always return an HttpResponse object
+    return render(request, 'emp/feedback.html', {'form': form})
