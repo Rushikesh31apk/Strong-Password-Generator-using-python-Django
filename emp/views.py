@@ -75,3 +75,7 @@ def do_update(request,id):
 
     
     return redirect('/emp/emphome/')
+
+
+def testmonials(request):
+    return render(request,'emp/testmonials.html',{})
