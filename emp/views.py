@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from .froms import FeedbackForm
 from .models import Emp, Testomonial  # Import Emp model
 
 
@@ -83,4 +84,13 @@ def testmonials(request):
     return render(request,'emp/testmonials.html',{'testi': testi})
 
 def feedback(request):
-    return render(request,'emp/feedback.html',{ })
+    if request.method == 'POST':
+        form= FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/emp/emphome/')
+        else:
+            print(form.errors)
+    else:
+        form= FeedbackForm()
+        return render(request,'emp/feedback.html',{'form':form })
